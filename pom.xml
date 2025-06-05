@@ -24,6 +24,7 @@
     </dependencies>
     
     <build>
+        <finalName>aplicacaoteste</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
