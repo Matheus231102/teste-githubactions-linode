@@ -13,7 +13,7 @@
     <version>${project.version}</version>
     <packaging>war</packaging>
     <name>mavenproject1-1.0.0</name>
-    
+        
     <dependencies>
         <dependency>
             <groupId>jakarta.platform</groupId>
@@ -34,8 +34,6 @@
                     <source>17</source>
                     <target>17</target>
                 </configuration>
-
-                
             </plugin>
 
             <plugin>
@@ -43,6 +41,24 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
             </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>write-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>${project.build.outputDirectory}/project.properties</outputFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 </project>
