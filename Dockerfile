@@ -6,13 +6,13 @@ WORKDIR /appteste
 COPY pom.xml .
 COPY src ./src
 
-RUN mvn dependency:go-offline
+RUN mvn dependency:go-offline -B
 
 # Build do projeto (gera o WAR)
 RUN mvn clean package -DskipTests
 
 # Stage 2: Imagem Payara Full para rodar a aplicação
-FROM payara/server-full:latest
+FROM payara/server-full:6.2025.4-jdk17
 
 # Copia o WAR gerado no stage anterior para o diretório de deploy do Payara
 COPY --from=build /appteste/target/aplicacaoteste.war $DEPLOY_DIR
@@ -20,4 +20,4 @@ COPY --from=build /appteste/target/aplicacaoteste.war $DEPLOY_DIR
 # Expõe a porta 8080
 EXPOSE 8080 4848
 
-CMD ["asadmin", "start-domain", "--verbose"]
+CMD ["asadmin", "start-domain", "--verbose", "--noCluster"]
